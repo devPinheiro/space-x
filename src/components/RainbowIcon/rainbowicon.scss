@@ -1,0 +1,35 @@
+@import '../../assets/scss/partials/variables.scss';
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding:10px;
+    & .circle{
+        width: 4px;
+        height: 4px;
+        border-radius: 50px;
+        margin-bottom: 2px;
+    }
+    .first {
+        background-color: map-get($palette , purple);
+    }
+    .second {
+        background-color: map-get($palette , blue);
+    }
+    .third {
+        background-color: map-get($palette , cyan);
+    }
+    .four {
+        background-color: map-get($palette , success-dark);
+    }
+    .fifth {
+        background-color: map-get($palette , yellow);
+    }
+    .sixth {
+        background-color: map-get($palette , danger);
+    }
+    .seventh {
+        background-color: map-get($palette , red);
+    }
+}

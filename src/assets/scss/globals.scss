@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Yantramanav:wght@100;300;400&display=swap');
+@import './partials/variables.scss';
+
+
+html,
+body {
+  background: $background;
+  margin: 0;
+  color: map-get($text-colors , bodyText);
+}
+
+
+* {
+  font-family: 'Yantramanav';
+  font-weight: 300;
+  
+
+  &:active {
+    outline: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

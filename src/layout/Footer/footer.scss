@@ -1,0 +1,74 @@
+@import '../../assets/scss/partials/variables.scss';
+
+.footer {
+  padding-bottom: 20px;
+
+  & .footer_top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    & ul {
+        list-style-type: none;
+        padding:  0;
+        font-size: 18px;
+    }
+    & a{
+        color: map-get($text-colors , bodyText);
+        text-decoration: none;
+    }
+    li {
+        margin-bottom: 8px;
+    }
+    & .desc {
+      width: 20rem;
+    }
+    .clear {
+        width: 10rem;
+    }
+  }
+   & .footer_bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+     font-size: 18px;
+    border-top: 0.1px solid map-get($palette , tertiary); 
+    & .socials {
+       display: flex;
+    flex-direction: row; 
+    }
+    & a {
+        color: $white;
+        text-decoration: none;
+    }
+   }
+   .socials {
+
+    & ul {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        padding:  0;
+        font-size: 18px;
+    }
+    & a{
+        color: map-get($text-colors , bodyText);
+        text-decoration: none;
+    }
+    li {
+        margin: 8px;
+    }
+    & .facebook {
+        padding-right: 70px;
+    }
+     & .twitter {
+        padding-right: 10px;
+    }
+   }
+}
+
+h4 {
+  color: map-get($text-colors, white);
+  font-weight: 300;
+  font-size: 18px;
+}
