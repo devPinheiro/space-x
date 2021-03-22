@@ -1,0 +1,26 @@
+@import '../../assets/scss/partials/variables.scss';
+
+.home_container {
+    display: flex;
+    flex-direction: row;
+    padding: 40px;
+    border: 2px solid map-get($text-colors, regular);
+
+    .card {
+         display: flex;
+    flex-direction: column;
+    width: 150px;
+    margin: 40px auto;
+    padding: 40px;
+    }
+
+    .title {
+        font-size: 1rem;
+        font-weight: 200;
+        color: $white;
+        margin: 0;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+}

@@ -11,24 +11,14 @@ import Search from '../../components/SVGComponents/search';
 // styles
 import './header.scss'
 
-interface HeaderProps {
-    isAuthenticated?: boolean, 
-    location: any
-}
 
-const Header = (props: HeaderProps) => {
-    const {isAuthenticated, location} = props;
-    
+const Header  = () => {
+  
     return (
         <header className="header">
             <div className="leftNav">
-                <Link to="/Login"><Logo /></Link>
-                 {location.pathname === '/' &&   <ul>
-                         <li><Link to="/"> Home</Link></li>
-                         <li><Link to="/"> Generi</Link></li>
-                         <li><Link to="/"> Preferiti</Link></li>
-                         
-                     </ul>}
+                <Link to="/"><Logo /></Link>
+                
             </div>
             
             <div className="icon">
