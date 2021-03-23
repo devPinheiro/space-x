@@ -1,60 +1,148 @@
-import React, { useState, useEffect, FormEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useToasts } from 'react-toast-notifications';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 // components
-import { Link, Redirect } from 'react-router-dom';
-import { fetchAllRockets } from '../../store/actions/fetch-all-rockets';
+import { fetchSingleRocket } from '../../store/actions/fetch-single-rocket';
+import Loader from '../../components/SVGComponents/logo';
+import ErrorPage from '../../components/SVGComponents/404';
+import Badge from '../../components/Badge';
 
 // styles
-import './home.scss';
-import { Rockets } from '../../store/actions/interfaces';
+import './rocket.scss';
 
+interface Props {
+  match: {
+    params: {
+      id: string;
+    };
+  };
+  rocketData: {
+    name: string;
+  };
+}
 
-
-
-const RocketView = () => {
+const RocketView = (props: Props) => {
   // manage state
   const rocketState = useSelector((s: any) => s.fetchSingleRocket);
-  const [rocketData, setRocketData] = useState([])
+  const [rocketData, setRocketData] = useState([]);
+  const [error, setError] = useState('')
 
   const dispatch = useDispatch();
   const { addToast } = useToasts();
 
- 
-  // useEffect for fetching all rockets mimics ComponentDidMount
-  useEffect(()=>{
-    dispatch(fetchAllRockets())
-  },[]);
+  // useEffect for fetching single rockets mimics ComponentDidMount using rocket id
+  useEffect(() => {
+    const { id } = props.match.params;
+    if (id) dispatch(fetchSingleRocket(id));
+  }, []);
 
-  useEffect(()=>{
-    if(rocketState.isSuccessful){
-      setRocketData(rocketState.data)
+  // handles use cases for handling errors and success
+  useEffect(() => {
+    if (rocketState.isSuccessful) {
+      setRocketData(rocketState.data);
     }
 
-    if(!rocketState.isSuccessful && rocketState.error){
-      addToast(rocketState.error, { appearance: 'error' })
+    if (!rocketState.isSuccessful && rocketState.error) {
+      addToast(rocketState.error, { appearance: 'error' });
+      setError(rocketState.error)
     }
-  }, [rocketState, addToast])
+  }, [rocketState, addToast]);
 
   return (
     <>
-    <h1 className='title'>Rockets</h1>
-    <div className="home_container">
-  { rocketState.isLoading && <span>Loading...</span>}
-    
+      <h1 className='title'>
+        <Link to='/'>Rockets </Link>&gt;{' '}
+        <span className='active'>{rocketData.name}</span>
+      </h1>
+      <div className='rocket_container'>
+        {rocketState.isLoading ? (
+          <Loader className='spinner' />
+        ) : error ? (<ErrorPage />) :(
+          <div className='card'>
+            <div className='section'>
+              <div className='section_a'>
+                <img
+                  src={
+                    rocketData &&
+                    rocketData.flickr_images &&
+                    rocketData.flickr_images[0]
+                  }
+                />
+              </div>
 
-    {
-      rocketData && rocketData.map((rocket: Rockets, index) =>{
-          return <div className='card' key={index}>
-              <img src={rocket.flickr_images[0]} />
-              <p>{rocket.name}</p>
+              <div className='section_b'>
+                <p className='title'>{rocketData.name}</p>
+                <p>
+                  First Flight:{' '}
+                  <span>
+                    {new Date(rocketData.first_flight).toLocaleDateString(
+                      'en-US',
+                      {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      }
+                    )}
+                  </span>
+                </p>
+                <p>
+                  Cost ${' '}
+                  <span>
+                    {rocketData &&
+                      rocketData.cost_per_launch &&
+                      rocketData.cost_per_launch.toLocaleString()}
+                  </span>
+                </p>
+
+                <p>
+                  <span>{rocketData.active ? 'Active' : 'Inactive'}</span>
+                </p>
+
+                <div className='success'>
+                  Success Rate:{' '}
+                  <Badge
+                    status={
+                      rocketData.success_rate_pct > 59
+                        ? 'green'
+                        : rocketData.success_rate_pct > 38 &&
+                          rocketData.success_rate_pct < 60
+                        ? 'orange'
+                        : 'red'
+                    }
+                  />
+                </div>
+                <div>
+                  <Link
+                    className='btn'
+                    to={{
+                      pathname: 'https://en.wikipedia.org/wiki/SpaceX_Starship',
+                    }}
+                    target='_blank'>
+                    View More
+                  </Link>
+                </div>
+              </div>
             </div>
-      })
-    }
-    </div>
-  
-     
+
+            <p className="desc">{rocketData.description}</p>
+
+            <div className='image_listview'>
+              {rocketData &&
+                rocketData.flickr_images &&
+                rocketData.flickr_images.map((item: string, index: string) => {
+                  return (
+                    <div className='image' key={index}>
+                      <img src={item} />
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        )}
+      </div>
     </>
   );
 };

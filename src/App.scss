@@ -4,5 +4,27 @@
 }
 
 .main_container {
-  min-height: 90vh;
+  min-height: 90vmin;
+  margin: 60px auto;
+}
+
+.spinner {
+  height: 40vmin;
+  pointer-events: none;
+  margin: 0 auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .spinner {
+    animation: App-logo-spin infinite 10s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

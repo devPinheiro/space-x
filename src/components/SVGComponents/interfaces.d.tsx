@@ -1,5 +1,6 @@
 export interface SvgProps {
     width?: string,
     height?: string,
-    fillColor?: string
+    fillColor?: string,
+    className?: string
 }

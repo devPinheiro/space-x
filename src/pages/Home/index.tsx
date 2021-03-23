@@ -1,13 +1,17 @@
-import React, { useState, useEffect, FormEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useToasts } from 'react-toast-notifications';
 import { useDispatch, useSelector } from 'react-redux';
 
 // components
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { fetchAllRockets } from '../../store/actions/fetch-all-rockets';
+import Loader from '../../components/SVGComponents/logo'
+import Card from '../../components/Card';
 
 // styles
 import './home.scss';
+
+// interfaces
 import { Rockets } from '../../store/actions/interfaces';
 
 
@@ -42,17 +46,15 @@ const Home = () => {
     <>
     <h1 className='title'>Rockets</h1>
     <div className="home_container">
-  { rocketState.isLoading && <span>Loading...</span>}
-    
+      <div className="grid-row">
 
-    {
+   
+  { rocketState.isLoading ? <Loader className="spinner" /> :
       rocketData && rocketData.map((rocket: Rockets, index) =>{
-          return <div className='card' key={index}>
-              <img src={rocket.flickr_images[0]} />
-              <p>{rocket.name}</p>
-            </div>
+          return <Card { ...rocket} />
       })
     }
+     </div>
     </div>
   
      
