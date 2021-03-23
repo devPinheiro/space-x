@@ -54,7 +54,7 @@ const RocketView = (props: Props) => {
     <>
       <h1 className='title'>
         <Link to='/'>Rockets </Link>&gt;{' '}
-        <span className='active'>{rocketData.name}</span>
+        <span className='active'>{rocketData && rocketData.name}</span>
       </h1>
       <div className='rocket_container'>
         {rocketState.isLoading ? (
@@ -132,7 +132,7 @@ const RocketView = (props: Props) => {
             <div className='image_listview'>
               {rocketData &&
                 rocketData.flickr_images &&
-                rocketData.flickr_images.map((item: string, index: string) => {
+                rocketData.flickr_images.map((item: string, index: number) => {
                   return (
                     <div className='image' key={index}>
                       <img src={item} />
