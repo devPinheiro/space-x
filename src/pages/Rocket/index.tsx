@@ -11,6 +11,7 @@ import Badge from '../../components/Badge';
 
 // styles
 import './rocket.scss';
+import { Rockets } from '../../store/actions/interfaces';
 
 interface Props {
   match: {
@@ -18,15 +19,22 @@ interface Props {
       id: string;
     };
   };
-  rocketData: {
-    name: string;
-  };
+}
+
+interface Rocket {
+  name: string;
+  cost_per_launch: string;
+  active: string;
+  flickr_images: any[];
+  success_rate_pct: number;
+  first_flight: string;
+  description: string;
 }
 
 const RocketView = (props: Props) => {
   // manage state
   const rocketState = useSelector((s: any) => s.fetchSingleRocket);
-  const [rocketData, setRocketData] = useState([]);
+  const [rocketData, setRocketData] = useState<Rocket | null>(null);
   const [error, setError] = useState('')
 
   const dispatch = useDispatch();
@@ -73,11 +81,11 @@ const RocketView = (props: Props) => {
               </div>
 
               <div className='section_b'>
-                <p className='title'>{rocketData.name}</p>
+                <p className='title'>{rocketData && rocketData.name}</p>
                 <p>
                   First Flight:{' '}
                   <span>
-                    {new Date(rocketData.first_flight).toLocaleDateString(
+                   {rocketData && new Date(rocketData.first_flight).toLocaleDateString(
                       'en-US',
                       {
                         weekday: 'long',
@@ -98,16 +106,16 @@ const RocketView = (props: Props) => {
                 </p>
 
                 <p>
-                  <span>{rocketData.active ? 'Active' : 'Inactive'}</span>
+                  <span>{ rocketData && rocketData.active ? 'Active' : 'Inactive'}</span>
                 </p>
 
                 <div className='success'>
                   Success Rate:{' '}
                   <Badge
                     status={
-                      rocketData.success_rate_pct > 59
+                      rocketData && rocketData.success_rate_pct > 59
                         ? 'green'
-                        : rocketData.success_rate_pct > 38 &&
+                        : rocketData && rocketData.success_rate_pct > 38 &&
                           rocketData.success_rate_pct < 60
                         ? 'orange'
                         : 'red'
@@ -127,7 +135,7 @@ const RocketView = (props: Props) => {
               </div>
             </div>
 
-            <p className="desc">{rocketData.description}</p>
+            <p className="desc">{rocketData &&rocketData.description}</p>
 
             <div className='image_listview'>
               {rocketData &&
