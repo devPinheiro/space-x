@@ -1,0 +1,94 @@
+@import '../../assets/scss/partials/variables.scss';
+
+.rocket_container {
+    display: flex;
+    flex-direction: row;
+    padding: 40px;
+    border: 2px solid map-get($text-colors, regular);
+
+   
+
+    .card {
+         .section{
+        display: flex;
+        flex-direction: row;
+    }
+        .section_a{
+            width: 70%;
+        }
+        .section_b {
+            padding-left: 15px;
+            width: 30%;
+            .title{
+                font-size: 1.5rem;
+                font-weight: 400;
+                color: $white;
+                margin: 0;
+            }
+        }
+        img {
+            width: 100%;
+        }
+    }
+
+    .image_listview {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        .image{
+            width: 390px;
+            margin: 5px;
+        }
+        img{
+            width: 100%;
+            
+        }
+    }
+
+    .btn{
+        background-color: map-get($palette, secondary);
+        color: #000;
+        display: flex;
+        justify-content: center;
+        padding: 5px 10px;
+        margin: 40px 0;
+        border-radius: 5px;
+    }
+
+    .success  {
+    display: flex;
+    align-items: center;
+}
+
+
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 200;
+    margin: 0;
+    padding-bottom: 20px;
+
+}
+
+a {
+    text-decoration: none;
+    color: map-get($text-colors, regular);
+
+}
+
+.active {
+    color: $white;
+}
+
+span {
+    color: $white;
+}
+
+.desc {
+    color: $white;
+    font-weight: 100;
+    width: 60%;
+    padding-bottom: 40px;
+}

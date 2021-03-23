@@ -23,6 +23,7 @@ export interface FetchAllRocketsActionRequest {
 
 export interface Rockets {
   id: string;
+  index?: string;
   name: string;
   flickr_images: any[];
   type: string;
@@ -34,6 +35,9 @@ export interface Rockets {
   first_flight: string;
   country: string;
   company: string;
+  cost_per_launch: string;
+  active: boolean;
+  description: string
 }
 
 

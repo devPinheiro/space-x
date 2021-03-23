@@ -6,6 +6,8 @@ import Footer from '../layout/Footer';
 
 // components
 const HomePage = lazy(() => import('../pages/Home'));
+const RocketView = lazy(() => import('../pages/Rocket'));
+const ErrorPage = lazy(() => import('../components/SVGComponents/404'))
 
 
 const Main = withRouter(({ location }) => {
@@ -16,7 +18,7 @@ const Main = withRouter(({ location }) => {
       <div className="main_container">
       <Switch>
         <Route exact={true} path={'/'} component={HomePage} />
-       
+        <Route exact={true} path={'/rocket/:id'} component={RocketView} />  
       </Switch>
       </div>
       

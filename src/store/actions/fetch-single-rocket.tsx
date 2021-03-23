@@ -69,6 +69,9 @@ export const fetchSingleRocket = (id: string) => (dispatch: Dispatch) => {
       dispatch(fetchSingleRocketSuccess(data));
     })
     .catch((error) => {
-      if(error) dispatch(fetchSingleRocketFailure('Something went wrong'));
+      if(error && error.response.data){dispatch(fetchSingleRocketFailure(error.response.data));}else{
+      dispatch(fetchSingleRocketFailure('Something went wrong'));
+
+      }
     });
 };
