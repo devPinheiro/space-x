@@ -51,7 +51,7 @@ const Home = () => {
    
   { rocketState.isLoading ? <Loader className="spinner" /> :
       rocketData && rocketData.map((rocket: Rockets, index) =>{
-          return <Card { ...rocket} />
+          return <Card { ...rocket} key={index} />
       })
     }
      </div>
